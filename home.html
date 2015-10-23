@@ -1,0 +1,231 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+
+    <title>MyApp</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://codemirror.net/lib/codemirror.css">
+
+    <style>
+    .CodeMirror {  
+    min-height:300px;
+    border: 1px solid #ddd; }
+    </style>
+    
+    
+<script>
+
+
+</script>
+    <!-- Custom styles for this template -->
+    
+ 
+  </head>
+
+  <body>
+
+    <div class="container">
+      
+
+<!---------------- TABBED AREA --------------------->
+
+<div role="tabpanel">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active tabLinks" id="tab_q1"><a href="#round1" aria-controls="round1" role="tab" data-toggle="tab">Round 1</a></li>
+    <li role="presentation" class="tabLinks"  id="tab_q2"><a href="#round2" aria-controls="profile" role="tab" data-toggle="tab">Round 2</a></li>
+    <li role="presentation"  class="tabLinks"  id="tab_q3"><a href="#round3" aria-controls="profile" role="tab" data-toggle="tab">Round 3</a></li>
+    <li role="presentation"  class="tabLinks"  id="tab_time"></li>
+    
+   
+  </ul>
+<form action="https://docs.google.com/forms/d/1_7K4XFroldohhjG9zIMTdBMA8am8yca5iEKHpgMWvMc/formResponse" 
+   method="POST" id="ss-form" target="_self" onsubmit="">
+   <div class="form-group">
+      <div class="tab-content">
+         <div role="tabpanel" class="tab-pane active" id="round1">
+            <div class="">
+               <br/>
+               <p>
+               <div id="div_q1"></div>
+               </p>
+               <br/>               
+<!--                <textarea id="text_q1" class="codeMirror" name="entry.377996752"></textarea> -->
+            </div>
+         </div>
+         <div role="tabpanel" class="tab-pane" id="round2">
+            <div class="">
+               <br/>
+               <p><div id="div_q2"></div></p>
+               <br/>              
+           <!--          <textarea  id="text_q2"  class="codeMirror"  name="entry.1598398260" ></textarea> -->
+            </div>
+         </div>
+         <!--- Tabs--->
+         <div role="tabpanel" class="tab-pane" id="round3">
+            <div class="">
+               <br/>               
+               <p> <div id="div_q3">
+               </div> </p>
+               <br/>               
+            <!--          <textarea  id="text_q3" class="codeMirror"  name="entry.1598398260" ></textarea> -->
+            </div>
+         </div>
+        
+      </div>
+   </div>
+</form>
+  <!-- Tab panes -->
+  
+ <div class="text-right">
+            <p>
+               
+               <a href="#" aria-controls=""  id="countdown" class="countdown_link" role="tab" data-toggle="tab" >Start </a>
+              <a href="#" id="stop_timer" > stop </a> 
+            </p>
+            <input name="entry.1886620488" value="" class="ss-q-short valid" id="result_text"  title="" type="text">
+            <button type="button" class="btn btn-default text-right" id="btn_check">Submit</button>
+             <input type="hidden" name="" value=""  id="cur_tab" />
+             <a href="https://drive.google.com/file/d/0B_3FaUqg1nANbkFNR3B6MEZNdk0/view" target="_blank"  id="answers" >Answers </a>
+         </div>
+        
+        
+        <p>
+       
+          
+        </p>
+      </div>
+
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.6.0/codemirror.min.js"></script>
+    <script src="https://codemirror.net/mode/clike/clike.js"></script>
+    
+    
+<script type="text/javascript">
+//GLOBAL TIMER VAR
+stop_timer = false;
+//BEGIN INIT
+$('.tabLinks').hide();
+$('#tab_q1').show();
+$("#cur_tab").val("1");
+start_timer(20);
+
+//FINISH INIT
+    
+ 
+  $('#stop_timer').click(function(){
+  stop_timer = true;
+ })
+    
+function start_timer(maxMins){
+
+// set the date we're counting down to
+var target_date = new Date($.now()).getTime();
+// variables for time units
+var days, hours, minutes, seconds, ms_step=10;
+// get tag element
+var countdown = document.getElementById('countdown');
+var intId = setInterval(function () {
+var current_date = new Date().getTime();
+var seconds_left = (target_date - current_date) / 1000;
+days = parseInt(seconds_left / 86400);
+seconds_left = seconds_left % 86400;
+hours = parseInt(seconds_left / 3600);
+seconds_left = seconds_left % 3600;
+min = parseInt(seconds_left / 60);
+sec = parseInt(seconds_left % 60);
+ms = parseInt(target_date-current_date);
+// format countdown string + set tag value
+if(Math.abs(min) > maxMins || stop_timer==true){
+alert('time up')
+clearInterval(intId);
+$('.ans_box').attr('readonly','readonly');
+
+}
+countdown.innerHTML = ''+
+'<span class="label label-default h2" style="font-size:20px">'+(maxMins-Math.abs(min))+' M </span> &nbsp;'+
+'<span class="label label-default h2" style="font-size:20px">'+ (60-Math.abs(sec))+' S</b></span>&nbsp;';
+//'<span class="label label-default">'+Math.abs(ms)+' ms</span></h4>';
+// this is just for milliseconds only
+/* countdown.innerHTML =
+'<span class="ms">'+ms+' ms</span>'; */
+}, ms_step); 
+
+
+}
+
+//FOR TAB PANEL QUESTIONS
+var q1 = "<?=  q1  ?>".replace(/<br\s*[\/]?>/gi, "\n") ;
+var q2 = "<?=  q2  ?>".replace(/<br\s*[\/]?>/gi, "\n") ;
+var q3 = "<?=  q3  ?>".replace(/<br\s*[\/]?>/gi, "\n") ;
+$('#div_q1').html("<a href='"+q1+"' target='_blank' >"+q1+"</a>");
+$('#div_q2').html("<a href='"+q2+"' target='_blank' >"+q2+"</a>");
+$('#div_q3').html("<a href='"+q3+"' target='_blank' >"+q3+"</a>");
+
+// CODE MIRROR CODE EDITOR
+
+codMirror("text_q1");
+codMirror("text_q2");
+codMirror("text_q3");
+
+function codMirror(textboxId){
+var editor = CodeMirror.fromTextArea(document.getElementById(textboxId), {
+    lineNumbers: false,
+    smartIndent : true,
+    mode: "text/x-java",
+  });
+}
+
+//check answer and enable next tab 
+ $('#btn_check').click(function(){
+ //check if valid answer text matches from hackerrank.com success run code text
+ var success_text = "Status: Accepted";
+ if($("#result_text").val()==success_text){
+ $("#result_text").val("");
+ }else{
+   return;
+ }
+ 
+ $('.tabLinks').hide();
+ var cur_tab = parseInt($("#cur_tab").val()) +1;
+ $('#tab_q'+cur_tab).show();
+ $('#tab_q'+cur_tab).click();
+ $("#cur_tab").val(cur_tab);
+ //start timer based on round
+ //clear time interval
+ stop_timer = false;
+ if(cur_tab == 2){
+   start_timer(30);
+ }
+ if(cur_tab == 3){
+   start_timer(40);
+ }
+
+ 
+ 
+ })
+</script>
+
+</script>
+  </body>
+</html>
